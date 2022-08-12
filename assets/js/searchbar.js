@@ -34,6 +34,8 @@ var getFranchiseData = function(title) {
 
 var displayTitleData = function(data) {
 
+    searchBarResEl.textContent = "";
+
     // if anime exists in data
     if (data.getElementsByTagName("anime").length > 0) {
 
@@ -43,15 +45,25 @@ var displayTitleData = function(data) {
             var animeTVType = animeTag[i].getAttribute("type");
             if (animeTVType == "TV") {
                 var animeTitleInfo = animeTag[i].getAttribute("name");
-                console.log(animeTitleInfo);
+
+
+                // for every title, append to the page
+                var animeTitleEl = document.createElement("div");
+                // animeTitleEl.classList.add(); //// TODO ONCE STYLES ARE SET UP
+                animeTitleEl.textContent = animeTitleInfo;
+
+                searchBarResEl.appendChild(animeTitleEl);
             }
         };
-
-        // TODO: for every title, append to the page
         
     }
     // if anime was not found in data
     else {
+        var notFoundEl = document.createElement("div");
+        notFoundEl.textContent = "Sorry, that anime was not found. Please try again.";
+
+        searchBarResEl.appendChild(notFoundEl);
+
         console.log("Anime not found...");
     }
     
@@ -62,6 +74,8 @@ var displayTitleData = function(data) {
 var formSubmitHandler = function(event) {
     event.preventDefault();
 
+    searchBarResEl.textContent = "";
+
     var animeTitle = animeInputEl.value.trim();
 
     if (animeTitle) {
@@ -71,7 +85,11 @@ var formSubmitHandler = function(event) {
         animeInputEl.value = "";
     }
     else {
-        // TODO: TURN THIS PLACEHOLDER INTO A MODAL!!!!!!!!!!!!
+        var notFoundEl = document.createElement("div");
+        notFoundEl.textContent = "Sorry, that anime was not found. Please try again.";
+
+        searchBarResEl.appendChild(notFoundEl);
+        
         console.log("please enter an anime title!!!!!!");
     }
 
