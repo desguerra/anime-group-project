@@ -36,6 +36,10 @@ var displayTitleData = function(data) {
 
     searchBarResEl.textContent = "";
 
+    var titleResEl = document.createElement("h2");
+    titleResEl.textContent = "Results: ";
+    searchBarResEl.appendChild(titleResEl);
+
     // if anime exists in data
     if (data.getElementsByTagName("anime").length > 0) {
 
@@ -47,11 +51,12 @@ var displayTitleData = function(data) {
                 var animeTitleInfo = animeTag[i].getAttribute("name");
 
 
-                // for every title, append to the page
                 // TODO: ON CLICK, GIVE MORE INFO ABOUT THE TITLE
+
+                // for every title, append to the page
+
                 var animeTitleEl = document.createElement("div");
-                // animeTitleEl.classList.add(); //// TODO ONCE STYLES ARE SET UP
-                animeTitleEl.textContent = animeTitleInfo;
+                animeTitleEl.textContent = "> " + animeTitleInfo;
 
                 searchBarResEl.appendChild(animeTitleEl);
             }
@@ -61,7 +66,7 @@ var displayTitleData = function(data) {
     // if anime was not found in data
     else {
         var notFoundEl = document.createElement("div");
-        notFoundEl.textContent = "Sorry, that anime was not found. Please try again.";
+        notFoundEl.textContent = "No results found. Please try again.";
 
         searchBarResEl.appendChild(notFoundEl);
 
@@ -87,7 +92,7 @@ var formSubmitHandler = function(event) {
     }
     else {
         var notFoundEl = document.createElement("div");
-        notFoundEl.textContent = "Sorry, that anime was not found. Please try again.";
+        notFoundEl.textContent = "Please enter an anime title.";
 
         searchBarResEl.appendChild(notFoundEl);
         
