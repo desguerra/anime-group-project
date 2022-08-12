@@ -32,6 +32,10 @@ var getFranchiseData = function(title) {
 
 };
 
+var test = function(event) {
+    console.log(event.target);
+};
+
 var displayTitleData = function(data) {
 
     searchBarResEl.textContent = "";
@@ -54,11 +58,14 @@ var displayTitleData = function(data) {
                 // TODO: ON CLICK, GIVE MORE INFO ABOUT THE TITLE
 
                 // for every title, append to the page
+                var animeTitleListEl = document.createElement("ul");
 
-                var animeTitleEl = document.createElement("div");
-                animeTitleEl.textContent = "> " + animeTitleInfo;
+                var animeTitleEl = document.createElement("li");
+                animeTitleEl.textContent = animeTitleInfo;
 
-                searchBarResEl.appendChild(animeTitleEl);
+                animeTitleListEl.appendChild(animeTitleEl);
+                searchBarResEl.appendChild(animeTitleListEl);
+                animeTitleEl.addEventListener("click", test);
             }
         };
         
