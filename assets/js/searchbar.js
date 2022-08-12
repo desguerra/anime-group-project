@@ -48,6 +48,7 @@ var displayTitleData = function(data) {
 
 
                 // for every title, append to the page
+                // TODO: ON CLICK, GIVE MORE INFO ABOUT THE TITLE
                 var animeTitleEl = document.createElement("div");
                 // animeTitleEl.classList.add(); //// TODO ONCE STYLES ARE SET UP
                 animeTitleEl.textContent = animeTitleInfo;
