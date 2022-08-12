@@ -32,7 +32,19 @@ var getFranchiseData = function(title) {
 
 };
 
-var test = function(event) {
+var displayAnimeData = function(event) {
+
+    searchBarResEl.textContent = "";
+
+    var animeTitleEl = document.createElement("h2");
+    animeTitleEl.textContent = event.target.textContent;
+    searchBarResEl.appendChild(animeTitleEl);
+
+    var animeDescEl = document.createElement("div");
+    animeDescEl.textContent = "description of anime";
+
+    searchBarResEl.appendChild(animeDescEl);
+
     console.log(event.target);
 };
 
@@ -65,7 +77,7 @@ var displayTitleData = function(data) {
 
                 animeTitleListEl.appendChild(animeTitleEl);
                 searchBarResEl.appendChild(animeTitleListEl);
-                animeTitleEl.addEventListener("click", test);
+                animeTitleEl.addEventListener("click", displayAnimeData);
             }
         };
         
