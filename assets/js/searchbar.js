@@ -14,17 +14,10 @@ var getFranchiseData = function(title) {
                 var parser = new DOMParser();
                 var xml = parser.parseFromString(data, "text/xml");
 
-                // get ID of only the anime
-                var animeTag = xml.getElementsByTagName("anime");
-                for (var i = 0; i < animeTag.length; i++) { 
-                    if (animeTag[i].getAttribute("type") == "TV") {
-                        var animeID = animeTag[i].getAttribute("id");
-                        console.log(animeID);
-                    }
-                };
-
                 // testing XML data output //
                 console.log(xml);
+
+                displayTitleData(xml);
 
             });
         } 
@@ -39,27 +32,25 @@ var getFranchiseData = function(title) {
 
 };
 
-// var getAnimeData = function(animeID) {
-//     var animeURL = "https://cdn.animenewsnetwork.com/encyclopedia/api.xml?anime=" + animeID;
-
-//     fetch(franNewsUrl).then(function(res) {
-//         if (res.ok) {
-//             // parse XML data
-//             res.text().then(function(data) {
-//                 // var parser = new DOMParser();
-//                 // var xml = parser.parseFromString(data, "text/xml");
-//                 // console.log(xml);
-//             });
-//         } 
-//         else {
-//             alert("Error: Anime ID Not Found");
-//         }
-//     })
+var displayTitleData = function(data) {
     
-//     .catch(function(error) {
-//         alert("Unable to connect to Anime News Network");
-//     });
-// };
+    var animeTag = data.getElementsByTagName("anime");
+    for (var i = 0; i < animeTag.length; i++) { 
+
+        var animeTVType = animeTag[i].getAttribute("type");
+        if (animeTVType == "TV") {
+
+            var animeTitle = animeTag[i].getElementsByTagName("info")[1].textContent;
+            console.log(animeTitle);
+
+            // get ID of only the anime
+            // var animeID = animeTag[i].getAttribute("id");
+            // console.log(animeID);
+
+        }
+    };
+
+};
 
 var formSubmitHandler = function(event) {
     event.preventDefault();
