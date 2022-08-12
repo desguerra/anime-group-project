@@ -22,33 +22,40 @@ var getFranchiseData = function(title) {
             });
         } 
         else {
-            alert("Error: Anime title Not Found");
+            console.log("Anime data Not Found");
         }
     })
     
     .catch(function(error) {
-        alert("Unable to connect to Anime News Network");
+        console.log("Unable to connect to Anime News Network");
     });
 
 };
 
 var displayTitleData = function(data) {
+
+    // if anime exists in data
+    if (data.getElementsByTagName("anime").length > 0) {
+
+        // get titles of anime that correspond to the search result
+        var animeTag = data.getElementsByTagName("anime");
+        for (var i = 0; i < animeTag.length; i++) { 
+            var animeTVType = animeTag[i].getAttribute("type");
+            if (animeTVType == "TV") {
+                var animeTitleInfo = animeTag[i].getAttribute("name");
+                console.log(animeTitleInfo);
+            }
+        };
+
+        // TODO: for every title, append to the page
+        
+    }
+    // if anime was not found in data
+    else {
+        console.log("Anime not found...");
+    }
     
-    var animeTag = data.getElementsByTagName("anime");
-    for (var i = 0; i < animeTag.length; i++) { 
 
-        var animeTVType = animeTag[i].getAttribute("type");
-        if (animeTVType == "TV") {
-
-            var animeTitle = animeTag[i].getElementsByTagName("info")[1].textContent;
-            console.log(animeTitle);
-
-            // get ID of only the anime
-            // var animeID = animeTag[i].getAttribute("id");
-            // console.log(animeID);
-
-        }
-    };
 
 };
 
