@@ -41,8 +41,9 @@ var displayAnimeData = function(event, data) {
     searchBarResEl.appendChild(animeTitleEl);
 
     var descBool = false;
+    var epBool = false;
 
-    // TODO: GRAB AND DISPLAY DATA FROM API
+    // GRAB AND DISPLAY DATA FROM API
     var animeTag = data.getElementsByTagName("anime");
     for (var i = 0; i < animeTag.length; i++) {
         var animeTVName = animeTag[i].getAttribute("name");
@@ -51,6 +52,25 @@ var displayAnimeData = function(event, data) {
         if (animeTVName == animeTitleEl.textContent && animeTVType == "TV") {
 
             var animeInfoLength = animeTag[i].getElementsByTagName("info").length;
+
+            for (var j = 0; j < animeInfoLength; j++) {
+                if (animeTag[i].getElementsByTagName("info")[j].getAttribute("type") == "Number of episodes") {
+                    var animeEpEl = document.createElement("h3");
+                    animeEpEl.textContent = "No. of Episodes";
+
+                    searchBarResEl.appendChild(animeEpEl);
+
+                    var animeDescription = animeTag[i].getElementsByTagName("info")[j].textContent;
+
+                    var animeEpEl = document.createElement("div");
+                    animeEpEl.textContent = animeDescription;
+                    searchBarResEl.appendChild(animeEpEl);
+
+                    epBool = true;
+                    break;
+                }
+            };
+
             for (var j = 0; j < animeInfoLength; j++) {
                 if (animeTag[i].getElementsByTagName("info")[j].getAttribute("type") == "Plot Summary") {
                     var animePlotEl = document.createElement("h3");
@@ -69,6 +89,20 @@ var displayAnimeData = function(event, data) {
                 }
             };
 
+            // if no # of episodes found
+            if (!epBool) {
+                var animePlotEl = document.createElement("h3");
+                animePlotEl.textContent = "Plot Summary";
+
+                searchBarResEl.appendChild(animePlotEl);
+
+                var animeNoDescEl = document.createElement("div");
+                animeNoDescEl.textContent = "Sorry, no plot summary for this anime was found...";
+                searchBarResEl.appendChild(animeNoDescEl);
+                
+                console.log("Sorry, no plot summary for this anime was found...");
+            }
+            
             // if no plot summary was found
             if (!descBool) {
                 var animePlotEl = document.createElement("h3");
