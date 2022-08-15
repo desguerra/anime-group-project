@@ -32,7 +32,7 @@ var getFranchiseData = function(title) {
 
 };
 
-var displayAnimeData = function(event) {
+var displayAnimeData = function(event, data) {
 
     searchBarResEl.textContent = "";
 
@@ -40,12 +40,51 @@ var displayAnimeData = function(event) {
     animeTitleEl.textContent = event.target.textContent;
     searchBarResEl.appendChild(animeTitleEl);
 
-    var animeDescEl = document.createElement("div");
-    animeDescEl.textContent = "description of anime";
+    var descBool = false;
 
-    searchBarResEl.appendChild(animeDescEl);
+    // TODO: GRAB AND DISPLAY DATA FROM API
+    var animeTag = data.getElementsByTagName("anime");
+    for (var i = 0; i < animeTag.length; i++) {
+        var animeTVName = animeTag[i].getAttribute("name");
+        var animeTVType = animeTag[i].getAttribute("type");
 
-    console.log(event.target);
+        if (animeTVName == animeTitleEl.textContent && animeTVType == "TV") {
+
+            var animeInfoLength = animeTag[i].getElementsByTagName("info").length;
+            for (var j = 0; j < animeInfoLength; j++) {
+                if (animeTag[i].getElementsByTagName("info")[j].getAttribute("type") == "Plot Summary") {
+                    var animePlotEl = document.createElement("h3");
+                    animePlotEl.textContent = "Plot Summary";
+
+                    searchBarResEl.appendChild(animePlotEl);
+
+                    var animeDescription = animeTag[i].getElementsByTagName("info")[j].textContent;
+
+                    var animeDescEl = document.createElement("div");
+                    animeDescEl.textContent = animeDescription;
+                    searchBarResEl.appendChild(animeDescEl);
+
+                    descBool = true;
+                    break;
+                }
+            };
+
+            // if no plot summary was found
+            if (!descBool) {
+                var animePlotEl = document.createElement("h3");
+                animePlotEl.textContent = "Plot Summary";
+
+                searchBarResEl.appendChild(animePlotEl);
+
+                var animeNoDescEl = document.createElement("div");
+                animeNoDescEl.textContent = "Sorry, no plot summary for this anime was found...";
+                searchBarResEl.appendChild(animeNoDescEl);
+                
+                console.log("Sorry, no plot summary for this anime was found...");
+            }
+
+        }
+    };
 };
 
 var displayTitleData = function(data) {
@@ -66,9 +105,6 @@ var displayTitleData = function(data) {
             if (animeTVType == "TV") {
                 var animeTitleInfo = animeTag[i].getAttribute("name");
 
-
-                // TODO: ON CLICK, GIVE MORE INFO ABOUT THE TITLE
-
                 // for every title, append to the page
                 var animeTitleListEl = document.createElement("ul");
 
@@ -77,7 +113,10 @@ var displayTitleData = function(data) {
 
                 animeTitleListEl.appendChild(animeTitleEl);
                 searchBarResEl.appendChild(animeTitleListEl);
-                animeTitleEl.addEventListener("click", displayAnimeData);
+                // on click, display anime description
+                animeTitleEl.addEventListener("click", function(event) {
+                    displayAnimeData(event, data);
+                });
             }
         };
         
