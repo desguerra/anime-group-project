@@ -3,6 +3,7 @@
 var searchBarFormEl = document.querySelector("#search-bar-form"); // <form> ID
 var animeInputEl = document.querySelector("#anime-title"); // form <input> id
 var searchBarResEl = document.querySelector("#search-bar-results"); // search results <div> id
+var resetHistBtn = document.querySelector("#clear-history"); // clear history button
 
 var getFranchiseData = function(title) {
     var franNewsUrl = "https://cdn.animenewsnetwork.com/encyclopedia/api.xml?title=~" + title;
@@ -29,6 +30,55 @@ var getFranchiseData = function(title) {
     .catch(function(error) {
         console.log("Unable to connect to Anime News Network");
     });
+
+};
+
+var displaySearchHistory = function() {
+
+    if (localStorage.getItem("titles")) {
+        var histHeadingEl = document.createElement("h4");
+        histHeadingEl.textContent = "Re-visit Recent Searches:";
+        searchBarResEl.appendChild(histHeadingEl);
+
+        var searchHistoryList = localStorage.getItem("titles").split(',');
+
+        for (var i=1; i < searchHistoryList.length; i++) {
+            var titleSearchEl = document.createElement("button");
+            titleSearchEl.textContent = searchHistoryList[i];
+            searchBarResEl.appendChild(titleSearchEl);
+            // titleSearchEl.addEventListener("click", test);
+        };
+
+    }
+};
+
+var addToHistory = function(event) {
+
+    // console.log(event.target.textContent);
+
+    // store searched city in `localStorage` if city exists
+    if (event.target.textContent) {
+
+        if (localStorage.getItem("titles")) {
+            var searchHistoryList = localStorage.getItem("titles");
+        }
+        else {
+            var searchHistoryList = [];
+        }
+
+        var newSearch = event.target.textContent;
+
+        // IF newSearch IS IN LIST, THEN DO NOT ADD AGAIN
+        if (searchHistoryList.includes(newSearch)) {
+            console.log(newSearch + " is already in the list...");
+        }
+        else {
+            localStorage.setItem("titles", [...[searchHistoryList], newSearch]);
+        }
+
+    }
+
+    displaySearchHistory();
 
 };
 
@@ -169,6 +219,7 @@ var displayTitleData = function(data) {
                 // on click, display anime description
                 animeTitleEl.addEventListener("click", function(event) {
                     displayAnimeData(event, data);
+                    addToHistory(event);
                 });
             }
         };
@@ -212,4 +263,10 @@ var formSubmitHandler = function(event) {
 
 };
 
+var clearHistory = function() {
+    localStorage.clear();
+    location.reload();
+};
+
 searchBarFormEl.addEventListener("submit", formSubmitHandler);
+resetHistBtn.addEventListener("click", clearHistory);
