@@ -33,9 +33,16 @@ var getFranchiseData = function(title) {
 
 };
 
+var searchClick = function(event) {
+
+    getFranchiseData(event.target.textContent);
+
+};
+
 var displaySearchHistory = function() {
 
     if (localStorage.getItem("titles")) {
+        
         var histHeadingEl = document.createElement("h4");
         histHeadingEl.textContent = "Re-visit Recent Searches:";
         searchBarResEl.appendChild(histHeadingEl);
@@ -46,18 +53,16 @@ var displaySearchHistory = function() {
             var titleSearchEl = document.createElement("button");
             titleSearchEl.textContent = searchHistoryList[i];
             searchBarResEl.appendChild(titleSearchEl);
-            // titleSearchEl.addEventListener("click", test);
+            titleSearchEl.addEventListener("click", searchClick);
         };
 
     }
 };
 
-var addToHistory = function(event) {
-
-    // console.log(event.target.textContent);
+var addToHistory = function(title) {
 
     // store searched city in `localStorage` if city exists
-    if (event.target.textContent) {
+    if (title) {
 
         if (localStorage.getItem("titles")) {
             var searchHistoryList = localStorage.getItem("titles");
@@ -66,7 +71,7 @@ var addToHistory = function(event) {
             var searchHistoryList = [];
         }
 
-        var newSearch = event.target.textContent;
+        var newSearch = title;
 
         // IF newSearch IS IN LIST, THEN DO NOT ADD AGAIN
         if (searchHistoryList.includes(newSearch)) {
@@ -77,8 +82,6 @@ var addToHistory = function(event) {
         }
 
     }
-
-    displaySearchHistory();
 
 };
 
@@ -219,7 +222,7 @@ var displayTitleData = function(data) {
                 // on click, display anime description
                 animeTitleEl.addEventListener("click", function(event) {
                     displayAnimeData(event, data);
-                    addToHistory(event);
+                    displaySearchHistory();
                 });
             }
         };
@@ -248,6 +251,7 @@ var formSubmitHandler = function(event) {
 
     if (animeTitle) {
         getFranchiseData(animeTitle);
+        addToHistory(animeTitle);
 
         // reset form
         animeInputEl.value = "";
