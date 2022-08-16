@@ -54,6 +54,17 @@ var displayAnimeData = function(event, data) {
             var animeInfoLength = animeTag[i].getElementsByTagName("info").length;
 
             for (var j = 0; j < animeInfoLength; j++) {
+                if (animeTag[i].getElementsByTagName("info")[j].getAttribute("type") == "Picture") {
+                    var animeImgEl = document.createElement("img");
+                    animeImgEl.setAttribute("src", animeTag[i].getElementsByTagName("info")[j].getAttribute("src"));
+
+                    searchBarResEl.appendChild(animeImgEl);
+                    
+                    break;
+                }
+            };
+
+            for (var j = 0; j < animeInfoLength; j++) {
                 if (animeTag[i].getElementsByTagName("info")[j].getAttribute("type") == "Number of episodes") {
                     var animeEpEl = document.createElement("h3");
                     animeEpEl.textContent = "No. of Episodes";
@@ -62,9 +73,9 @@ var displayAnimeData = function(event, data) {
 
                     var animeDescription = animeTag[i].getElementsByTagName("info")[j].textContent;
 
-                    var animeEpEl = document.createElement("div");
-                    animeEpEl.textContent = animeDescription;
-                    searchBarResEl.appendChild(animeEpEl);
+                    var animeDivEpEl = document.createElement("div");
+                    animeDivEpEl.textContent = animeDescription;
+                    searchBarResEl.appendChild(animeDivEpEl);
 
                     epBool = true;
                     break;
@@ -81,7 +92,7 @@ var displayAnimeData = function(event, data) {
                     var animeDescription = animeTag[i].getElementsByTagName("info")[j].textContent;
 
                     var animeDescEl = document.createElement("div");
-                    animeDescEl.textContent = animeDescription;
+                    animeDescEl.innerHTML = animeDescription;
                     searchBarResEl.appendChild(animeDescEl);
 
                     descBool = true;
@@ -91,18 +102,18 @@ var displayAnimeData = function(event, data) {
 
             // if no # of episodes found
             if (!epBool) {
-                var animePlotEl = document.createElement("h3");
-                animePlotEl.textContent = "Plot Summary";
+                var animeH3El = document.createElement("h3");
+                animeH3El.textContent = "No. of Episodes";
 
-                searchBarResEl.appendChild(animePlotEl);
+                searchBarResEl.appendChild(animeH3El);
 
-                var animeNoDescEl = document.createElement("div");
-                animeNoDescEl.textContent = "Sorry, no plot summary for this anime was found...";
-                searchBarResEl.appendChild(animeNoDescEl);
+                var animeNoEpEl = document.createElement("div");
+                animeNoEpEl.textContent = "Sorry, number of episodes for this anime was found...";
+                searchBarResEl.appendChild(animeNoEpEl);
                 
-                console.log("Sorry, no plot summary for this anime was found...");
+                console.log("Sorry, number of episodes for this anime was found...");
             }
-            
+
             // if no plot summary was found
             if (!descBool) {
                 var animePlotEl = document.createElement("h3");
@@ -116,6 +127,14 @@ var displayAnimeData = function(event, data) {
                 
                 console.log("Sorry, no plot summary for this anime was found...");
             }
+
+            var animeCreditEl = document.createElement("h4");
+            animeCreditEl.innerHTML = 'Source of data: Anime News Network API. Full details at <span id="ann"></span>.';
+            searchBarResEl.appendChild(animeCreditEl);
+
+            var annCreditsEl = document.querySelector("#ann");
+            var creditUrl = "https://www.animenewsnetwork.com/encyclopedia/anime.php?id=" + animeTag[i].getAttribute("id");
+            annCreditsEl.innerHTML = '<a href="' + creditUrl + '" target="_blank">Anime News Network</a>';
 
         }
     };
