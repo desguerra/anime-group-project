@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bulma CSS Stylesheet-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     
     <!-- External PURE CSS Stylesheet -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css" integrity="sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH" crossorigin="anonymous">
@@ -31,22 +34,23 @@
         <form id="search-bar-form">
             <label class="form-label" for="anime-title">Search an anime title: </label>
             <input name="anime-title" id="anime-title" type="text" autofocus="true" />
-            <button type="submit" class="pure-button-active">Get More Info</button>
-            <button type="button" id="clear-history" class="pure-button-active">Clear Search History</button>
+            <button type="submit" class="button is-dark">Get More Info</button>
+            <button type="button" id="clear-history" class="button is-dark">Clear Search History</button>
         </form>
 
         <!-- dynamically display search results -->
-        <div id="search-bar-results"></div>
+        <div id="search-bar-results" class="content"></div>
+        <h3>Results</h3>
 
     </section>
 
-    <section id="button-container">
+    <section id="button-container" class="button is-dark">
         <!-- button stuff goes here -->
     </section>
 
     <section id="recently-added-container">
         <!-- 5 of the most recently added anime -->
-    </section>
+        <h2>Recommended List</h2>
 
     <!-- link main custon JS sheet -->
     <script src="./assets/js/script.js"></script>
