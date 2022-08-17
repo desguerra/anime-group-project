@@ -1,0 +1,47 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+
+h2, h3, h4, h5, h6 {
+    padding: 15px 0px;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 200px;
+}
+
+.header {
+    padding: 1rem;
+    text-align: center;
+}
+
+.section {
+    padding: 0 1.5rem;
+}
+
+.center-text {
+    text-align: center;
+}
+
+/* MEDIA QUERY FOR TABLETS AND LARGER */
+@media screen and (min-width: 575px) {
+
+    .section {
+        padding: 0 2rem;
+    }
+}
+
+@media screen and (min-width: 768px) {
+ 
+    .section {
+        padding: 0 5rem;
+    }
+}
+
+@media screen and (min-width: 980px) {
+
+    .section {
+        padding: 0 12rem;
+    }
+}
