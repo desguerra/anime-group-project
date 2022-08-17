@@ -45,16 +45,24 @@ var displaySearchHistory = function() {
         
         var histHeadingEl = document.createElement("h4");
         histHeadingEl.textContent = "Re-visit Recent Searches:";
-        searchBarResEl.appendChild(histHeadingEl);
+        //searchBarResEl.appendChild(histHeadingEl);
+
+        var searchBtnContEl = document.createElement("div");
+        searchBtnContEl.classList.add("center-text");
+
+        searchBtnContEl.appendChild(histHeadingEl);
 
         var searchHistoryList = localStorage.getItem("titles").split(',');
 
         for (var i=1; i < searchHistoryList.length; i++) {
             var titleSearchEl = document.createElement("button");
             titleSearchEl.textContent = searchHistoryList[i];
-            searchBarResEl.appendChild(titleSearchEl);
+
+            searchBtnContEl.appendChild(titleSearchEl);
             titleSearchEl.addEventListener("click", searchClick);
         };
+
+        searchBarResEl.appendChild(searchBtnContEl);
 
     }
 };
@@ -91,6 +99,7 @@ var displayAnimeData = function(event, data) {
 
     var animeTitleEl = document.createElement("h2");
     animeTitleEl.textContent = event.target.textContent;
+    animeTitleEl.classList.add("center-text");
     searchBarResEl.appendChild(animeTitleEl);
 
     var descBool = false;
@@ -126,7 +135,7 @@ var displayAnimeData = function(event, data) {
 
                     var animeDescription = animeTag[i].getElementsByTagName("info")[j].textContent;
 
-                    var animeDivEpEl = document.createElement("div");
+                    var animeDivEpEl = document.createElement("p");
                     animeDivEpEl.textContent = animeDescription;
                     searchBarResEl.appendChild(animeDivEpEl);
 
@@ -144,7 +153,7 @@ var displayAnimeData = function(event, data) {
 
                     var animeDescription = animeTag[i].getElementsByTagName("info")[j].textContent;
 
-                    var animeDescEl = document.createElement("div");
+                    var animeDescEl = document.createElement("p");
                     animeDescEl.innerHTML = animeDescription;
                     searchBarResEl.appendChild(animeDescEl);
 
