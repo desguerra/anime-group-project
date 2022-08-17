@@ -17,7 +17,6 @@ function searchAnime(event){
 
        
             window.open(randomUrl, '_blank').focus();
-            /*window.location = (randomUrl); */
             console.log(randomUrl);
 
         });
