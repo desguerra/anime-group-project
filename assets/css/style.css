@@ -25,6 +25,14 @@ img {
     text-align: center;
 }
 
+.click-on-hover {
+    cursor: pointer;
+}
+
+.click-on-hover:hover {
+    color: hsl(217, 71%, 53%);
+}
+
 /* MEDIA QUERY FOR TABLETS AND LARGER */
 @media screen and (min-width: 575px) {
 

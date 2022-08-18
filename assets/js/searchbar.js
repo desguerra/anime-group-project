@@ -225,6 +225,7 @@ var displayTitleData = function(data) {
 
                 var animeTitleEl = document.createElement("li");
                 animeTitleEl.textContent = animeTitleInfo;
+                animeTitleEl.classList.add("click-on-hover");
 
                 animeTitleListEl.appendChild(animeTitleEl);
                 searchBarResEl.appendChild(animeTitleListEl);
