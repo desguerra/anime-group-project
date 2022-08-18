@@ -12,10 +12,6 @@ img {
     height: 200px;
 }
 
-nav {
-    display: none;
-}
-
 .header {
     padding: 1rem;
     text-align: center;
@@ -46,9 +42,7 @@ nav {
 }
 
 @media screen and (min-width: 768px) {
-    nav {
-        display: block;
-    }
+
     .section {
         padding: 0 5rem;
     }
