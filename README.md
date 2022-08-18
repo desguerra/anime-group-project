@@ -21,11 +21,11 @@
   
   ## Screenshots
 
-![screenshot 1 of project]
+![screenshot 1 of project](assets/images/SS1.PNG)
 
-![screenshot 2 of project]
+![screenshot 2 of project](assets/images/SS2.PNG)
 
-![screenshot 2 of project]
+![screenshot 3 of project](assets/images/SS3.PNG)
 
 ## Contribution
 Made with ❤️ by Nikki Esguerra - Sarah Touy - William Wartick
