@@ -6,10 +6,15 @@
  
  >SO THAT I can decide on what anime to binge-watch next
 
+## Deployed Link
+* [Live URL](https://desguerra.github.io/weeb-army/)
+
 ## Built With
 * HTML
 * CSS
 * Javascript
+* [Bulma CSS](https://bulma.io/)
+* [Pure CSS](https://purecss.io/)
 
 ## APIs used 
 
@@ -29,5 +34,3 @@
 
 ## Contribution
 Made with ❤️ by Nikki Esguerra - Sarah Touy - William Wartick
-
-
